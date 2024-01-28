@@ -8,11 +8,11 @@
     "start": "ts-node src/server.ts",
     "watch:ts": "npm-watch",
     "start:dev": "nodemon src/server.ts --exec ts-node"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.1",
     "express": "^4.18.2"
   },
   "devDependencies": {
