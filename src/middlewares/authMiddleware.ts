@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import config from '../configs/config';
 
-export const authenticateToken = (
+export const authenticateMiddleware = (
   req: CustomRequest,
   res: Response,
   next: NextFunction
@@ -18,5 +18,5 @@ export const authenticateToken = (
   });
 };
 interface CustomRequest extends Request {
-  user: any;
+  user?: any;
 }

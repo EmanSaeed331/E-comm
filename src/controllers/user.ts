@@ -40,10 +40,27 @@ export class UserController {
     }
   }
 
-  // implement other user-related methods (login, update, delete, etc.)
+  async updateUser(
+    userId: number,
+    newUsername?: string | any,
+    newPassword?: string | any
+  ): Promise<boolean> {
+    try {
+      const [result] = await this.connection.query(
+        'UPDATE users SET username = ?, password = ? WHERE id = ?',
+        [newUsername, newPassword, userId]
+      );
 
-  async closeConnection(): Promise<void> {
-    // Optionally, provide a method to close the connection when it's no longer needed
-    await this.connection.end();
+      if ('affectedRows' in result && result.affectedRows === 1) {
+        return true; // Update successful
+      } else {
+        throw new Error(
+          'User update failed. User not found or no changes made.'
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('User update failed');
+    }
   }
 }
